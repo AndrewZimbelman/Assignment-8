@@ -1,0 +1,35 @@
+---
+title: Assignment 8 
+formate: html
+editor: visual
+---
+
+
+
+
+Covid_19_Data <- data.frame(abb = state.abb, region = state.region,name = state.name)
+
+merged_data = merge(x = covid, y = Covid_19_Data, all.x  = TRUE)  
+cumulative_merged_data = merged_data |>
+  group_by(region, date)|>
+  summarize(cases = sum(cases), region, deaths = sum(deaths, na.omit = TRUE)) >
+  pivot_longer(cols = c('cases' , 'deaths'
+                        names_to
+
+fun
+
+
+cumulative_merged_data =  merged_data |>
+  select(region, date, cases, deaths)|>
+  group_by(region , date)|>
+  summarise(cases = sum(cases), deaths = sum(deaths, na.rm = TRUE))
+
+split_cumulative_merged_data = cumulative_merged_data |>
+  split(cumulative_merged_data, region)
+
+
+cumulative_merged_data |>
+  ggplot(aes(x = date, y = cases)) +
+  geom_line() +
+  facet_wrap("region")
+---  
